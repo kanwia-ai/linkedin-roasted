@@ -119,11 +119,11 @@ We're not judging. The algorithm is judging. But we're not.`
   coffeeLiar: {
     absurdist: (data) => `You've promised coffee to ${data.mentions} different humans this year.
 
-That's ${data.mentions} coffees. At 30 minutes each, that's ${Math.round(data.mentions * 0.5)} hours of coffee.
+That's ${data.mentions} coffees. At 30 minutes each, that's ${Math.round(Number(data.mentions) * 0.5)} hours of coffee.
 
-You have not spent ${Math.round(data.mentions * 0.5)} hours having coffee.
+You have not spent ${Math.round(Number(data.mentions) * 0.5)} hours having coffee.
 
-You have spent ${Math.round(data.mentions * 0.5)} hours lying about future coffee.
+You have spent ${Math.round(Number(data.mentions) * 0.5)} hours lying about future coffee.
 
 The coffee does not exist. It never did.`,
 
@@ -281,21 +281,26 @@ The month passed. The connections remain.`
   },
 
   ghost: {
-    absurdist: (data) => `You and ${data.ghosts[0].name} exchanged ${data.ghosts[0].messageCount} messages.
+    absurdist: (data) => {
+      const ghosts = data.ghosts as Array<{ name: string; messageCount: number; lastContactFormatted: string }>;
+      return `You and ${ghosts[0].name} exchanged ${ghosts[0].messageCount} messages.
 
 Then nothing. Radio silence.
 
-${data.ghosts[0].name} is out there somewhere. Living their life.
+${ghosts[0].name} is out there somewhere. Living their life.
 
 Probably thinking about you never.
 
 You were their most active LinkedIn relationship for a while there.
 
-Now you're a memory. A notification they don't get anymore.`,
+Now you're a memory. A notification they don't get anymore.`;
+    },
 
-    meta: (data) => `${data.ghosts[0].name}: ${data.ghosts[0].messageCount} messages exchanged.
+    meta: (data) => {
+      const ghosts = data.ghosts as Array<{ name: string; messageCount: number; lastContactFormatted: string }>;
+      return `${ghosts[0].name}: ${ghosts[0].messageCount} messages exchanged.
 
-Last contact: ${data.ghosts[0].lastContactFormatted}.
+Last contact: ${ghosts[0].lastContactFormatted}.
 
 LinkedIn still suggests you reconnect.
 
@@ -303,25 +308,32 @@ You ignore the suggestion. So do they.
 
 This is how professional relationships decay.
 
-The algorithm watches. The algorithm remembers.`,
+The algorithm watches. The algorithm remembers.`;
+    },
 
-    deadpan: (data) => `Active relationships gone quiet:
+    deadpan: (data) => {
+      const ghosts = data.ghosts as Array<{ name: string; messageCount: number; lastContactFormatted: string }>;
+      return `Active relationships gone quiet:
 
-${data.ghosts[0].name} — last message: ${data.ghosts[0].lastContactFormatted}
+${ghosts[0].name} — last message: ${ghosts[0].lastContactFormatted}
 
-${data.ghosts.length > 1 ? `${data.ghosts[1].name} — last message: ${data.ghosts[1].lastContactFormatted}` : ''}
+${ghosts.length > 1 ? `${ghosts[1].name} — last message: ${ghosts[1].lastContactFormatted}` : ''}
 
-They're fine. Probably.`,
+They're fine. Probably.`;
+    },
 
-    universal: (data) => `You and ${data.ghosts[0].name} used to talk.
+    universal: (data) => {
+      const ghosts = data.ghosts as Array<{ name: string; messageCount: number; lastContactFormatted: string }>;
+      return `You and ${ghosts[0].name} used to talk.
 
-${data.ghosts[0].messageCount} messages over time. Ideas exchanged. Plans made maybe.
+${ghosts[0].messageCount} messages over time. Ideas exchanged. Plans made maybe.
 
 Then one day, you just... stopped.
 
 No fight. No falling out. Just silence.
 
-This is fine. This is how it works. Everyone has a ${data.ghosts[0].name}.`
+This is fine. This is how it works. Everyone has a ${ghosts[0].name}.`;
+    }
   },
 
   replyGuy: {
@@ -351,7 +363,7 @@ The algorithm doesn't care which. It just notices.`,
 
 Posts: ${data.posts}.
 
-Ratio: ${Math.round(data.comments / Math.max(data.posts, 1))}:1.
+Ratio: ${Math.round(Number(data.comments) / Math.max(Number(data.posts), 1))}:1.
 
 You're an audience member.
 
