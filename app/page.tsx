@@ -1,24 +1,33 @@
-import Image from "next/image";
+import Link from 'next/link';
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <h1 className="text-4xl font-bold text-center sm:text-left">
-          LinkedIn Roasted
+    <main className="min-h-screen flex flex-col items-center justify-center p-8">
+      <div className="max-w-2xl text-center space-y-8">
+        <h1 className="text-5xl md:text-7xl font-bold tracking-tight">
+          LinkedIn<br />
+          <span className="text-[#8B5CF6]">Roasted</span>
         </h1>
-        <p className="text-center sm:text-left">
-          LinkedIn Wrapped, but it&apos;s mean. (Affectionately.)
+
+        <p className="text-xl md:text-2xl text-gray-400">
+          LinkedIn Wrapped, but it&apos;s mean.
+          <br />
+          <span className="text-gray-500">(Affectionately.)</span>
         </p>
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
+
+        <div className="pt-4">
+          <Link
             href="/upload"
+            className="inline-block px-8 py-4 bg-[#8B5CF6] text-white rounded-lg font-semibold text-lg hover:bg-[#7C3AED] transition-colors"
           >
-            Get Started
-          </a>
+            Get Roasted
+          </Link>
         </div>
-      </main>
-    </div>
+
+        <p className="text-sm text-gray-600 pt-8">
+          Your data never leaves your browser. Promise.
+        </p>
+      </div>
+    </main>
   );
 }
