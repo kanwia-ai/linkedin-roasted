@@ -1,23 +1,59 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 :root {
-  --background: #0A0A0A;
-  --foreground: #FFFFFF;
-  --accent: #0A66C2;
-  --highlight: #8B5CF6;
-  --muted: #6B7280;
+  --purple-gradient: linear-gradient(to right, #8B5CF6, #EC4899);
+  --purple-gradient-br: linear-gradient(to bottom right, #8B5CF6, #EC4899);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: dark;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: linear-gradient(to bottom right, #111827, #000000);
+  color: white;
+  min-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+/* Gradient text utility */
+.gradient-text {
+  background: linear-gradient(to right, #A78BFA, #F472B6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Gradient button */
+.gradient-btn {
+  background: linear-gradient(to right, #8B5CF6, #EC4899);
+  transition: opacity 0.2s;
+}
+
+.gradient-btn:hover {
+  opacity: 0.9;
+}
+
+/* Card styling */
+.roast-card {
+  background-color: #1F2937;
+  border-radius: 1rem;
+  box-shadow: 0 0 60px rgba(139, 92, 246, 0.15);
+}
+
+/* Stat text */
+.stat-text {
+  background: linear-gradient(to right, #A78BFA, #F472B6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Icon box */
+.icon-box {
+  background: linear-gradient(to bottom right, #8B5CF6, #EC4899);
 }

@@ -1,44 +1,54 @@
 'use client';
 
-import { motion } from 'framer-motion';
-
 interface HeadlineResultProps {
   headline: string;
   userName: string;
 }
 
 export function HeadlineResult({ headline, userName }: HeadlineResultProps) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="w-full max-w-lg mx-auto p-8"
-    >
-      <div className="bg-white rounded-xl p-6 text-black">
-        {/* Fake LinkedIn header */}
-        <div className="flex items-start gap-4 mb-4">
-          <div className="w-16 h-16 bg-gray-300 rounded-full flex items-center justify-center text-2xl">
-            👤
-          </div>
-          <div className="flex-1">
-            <h3 className="text-xl font-bold">{userName}</h3>
-            <p className="text-gray-600 text-sm leading-tight mt-1">
-              {headline.split(' | ').slice(1).join(' | ')}
-            </p>
-          </div>
-        </div>
+  // Parse headline - format is "Name | Part 1 | Part 2"
+  const parts = headline.split(' | ');
+  const headlineText = parts.slice(1).join(' | ');
 
-        {/* Fake LinkedIn stats */}
-        <div className="flex gap-4 text-xs text-gray-500 border-t pt-4">
-          <span>500+ connections</span>
-          <span>•</span>
-          <span>Roasted by LinkedIn Roasted</span>
+  return (
+    <div className="w-full max-w-md mx-auto">
+      {/* Card mimicking LinkedIn profile */}
+      <div className="bg-white rounded-xl overflow-hidden text-black">
+        {/* Banner */}
+        <div className="h-20 icon-box" />
+
+        {/* Profile content */}
+        <div className="px-6 pb-6">
+          {/* Avatar */}
+          <div className="relative -mt-12 mb-4">
+            <div className="w-24 h-24 bg-gray-300 rounded-full border-4 border-white flex items-center justify-center text-4xl">
+              👤
+            </div>
+          </div>
+
+          {/* Name and headline */}
+          <h3 className="text-xl font-bold text-gray-900">{userName}</h3>
+          <p className="text-gray-600 text-sm leading-relaxed mt-1">
+            {headlineText}
+          </p>
+
+          {/* Location and connections */}
+          <div className="flex gap-2 text-xs text-gray-500 mt-3">
+            <span>LinkedIn</span>
+            <span>•</span>
+            <span>500+ connections</span>
+          </div>
         </div>
       </div>
 
+      {/* Disclaimer */}
       <p className="text-center text-gray-500 text-sm mt-4">
-        Your new LinkedIn headline (please don&apos;t actually use this)
+        Your real LinkedIn headline (please don&apos;t actually use this)
       </p>
-    </motion.div>
+
+      <p className="text-center text-purple-400 text-sm mt-2 font-medium">
+        #LinkedInRoasted
+      </p>
+    </div>
   );
 }
